@@ -91,37 +91,37 @@ def sell():
 
      cash = query_db(f"SELECT cash FROM users WHERE username == '{session['username']}'")[0][0]
 
-     #try:
-     # queries api for live prices
-     responce = requests.get(f"https://api.coincap.io/v2/assets/{name}")
-     object = responce.json()
-     # indexes into json object to get desired values
-     price = object['data']['priceUsd']
-     price = round(float(price), 3)
-     
-     price = round(price * int(quantity))
-     if price < 1:
-          price = 3
-
-     user_id = query_db(f"SELECT id FROM users WHERE username == '{session['username']}'")[0][0]
-
-     check = 0
      try:
-          check = query_db(f"SELECT * FROM coins WHERE user_id == {user_id} AND name == '{name}'")[0][2]
+          # queries api for live prices
+          responce = requests.get(f"https://api.coincap.io/v2/assets/{name}")
+          object = responce.json()
+          # indexes into json object to get desired values
+          price = object['data']['priceUsd']
+          price = round(float(price), 3)
+          
+          price = round(price * int(quantity))
+          if price < 1:
+               price = 3
+
+          user_id = query_db(f"SELECT id FROM users WHERE username == '{session['username']}'")[0][0]
+
+          check = 0
+          try:
+               check = query_db(f"SELECT * FROM coins WHERE user_id == {user_id} AND name == '{name}'")[0][2]
+          except:
+               pass
+
+          if quantity > check:
+               return "Not enough Couns"
+
+          query_db(f"UPDATE users SET cash = {cash + price} WHERE username == '{session['username']}'")
+          if check == quantity:
+               query_db(f"DELETE FROM coins WHERE user_id == {user_id} AND name == '{name}'")
+          else:
+               query_db(f"UPDATE coins SET quantity = {int(check) - int(quantity)} WHERE user_id == {user_id} AND name == '{name}'")
+          return redirect("/")
      except:
-          pass
-
-     if quantity > check:
-          return "Not enough Couns"
-
-     query_db(f"UPDATE users SET cash = {cash + price} WHERE username == '{session['username']}'")
-     if check == quantity:
-          query_db(f"DELETE FROM coins WHERE user_id == {user_id} AND name == '{name}'")
-     else:
-          query_db(f"UPDATE coins SET quantity = {int(check) - int(quantity)} WHERE user_id == {user_id} AND name == '{name}'")
-     return redirect("/")
-     #except:
-          #return "No internet"
+          return "No internet"
 
 @app.route("/buy", methods=['POST'])
 def buy():
