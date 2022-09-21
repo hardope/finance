@@ -29,7 +29,7 @@ def main():
           "index.html",
           username=session['username'],
           coins=coins,
-          cash=cash
+          cash=f"$ {cash}"
           )
 
 @app.route("/login", methods=['POST', 'GET'])
