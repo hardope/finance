@@ -10,6 +10,5 @@ with ten thousand Dollars(Not real Money) and then usercan make transactions pur
 * Clone repository or download files.
 * Open terminal and move to the directory containing files.
 * Install python
-* In the terminal run: 'pip install requirements.txt'
+* In the terminal run: 'pip install -r requirements.txt'
 * In the terminal run: 'flask run'
-
