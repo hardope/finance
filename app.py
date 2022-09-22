@@ -1,9 +1,6 @@
 import sqlite3
 from flask import Flask, flash, redirect, render_template, request, jsonify, session
-import random
 import requests
-import json
-import locale
 
 app = Flask(__name__)
 app.secret_key = "Sessions"
@@ -84,10 +81,11 @@ def logout():
 def sell():
      name = request.form.get('name')
      quantity = request.form.get('quantity')
-     quantity = int(quantity)
 
      if not name or not quantity:
           return "Empty Fields"
+
+     quantity = int(quantity)
 
      cash = query_db(f"SELECT cash FROM users WHERE username == '{session['username']}'")[0][0]
 
@@ -96,7 +94,10 @@ def sell():
           responce = requests.get(f"https://api.coincap.io/v2/assets/{name}")
           object = responce.json()
           # indexes into json object to get desired values
-          price = object['data']['priceUsd']
+          try:
+               price = object['data']['priceUsd']
+          except:
+               return "Invalid coin."
           price = round(float(price), 3)
           
           price = round(price * int(quantity))
@@ -112,7 +113,7 @@ def sell():
                pass
 
           if quantity > check:
-               return "Not enough Couns"
+               return "Not enough Coins"
 
           query_db(f"UPDATE users SET cash = {cash + price} WHERE username == '{session['username']}'")
           if check == quantity:
