@@ -6,11 +6,11 @@
      font-family: Arial, Helvetica, sans-serif;
    }
    
-   /* Float four columns side by side */
    .column {
-     float: left;
-     width: 25%;
-     padding: 0 100px;
+     width: 200px;
+     height: 40px;
+    padding: 20px;
+    border-radius: 20px;
    }
    
    /* Remove extra left and right margins, due to padding in columns */
@@ -26,12 +26,9 @@
    /* Style the counter cards */
    .card {
      box-shadow: 2px 4px 8px 2px rgb(84, 164, 255); /* this adds the "card" effect */
-     padding: 5px;
+     padding: 20px;
      text-align: center;
      background-color: #f1f1f1;
-     padding-bottom: 5%;
-     padding-top: 10%;
-     
    }
    
    /* Responsive columns - one column layout (vertical) on small screens */
@@ -45,10 +42,11 @@
 
 
 #bod{
-  padding-left: 100px;
-  padding-top: 50px;
-  padding-right: 100px;
-  padding-bottom: 100px;
+  padding: 20px;
+  align-self: left;
+  margin-left: 20px;
+  height: 50px;
+  width: 200px;
 }
 
 .inline{

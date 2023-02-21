@@ -15,14 +15,13 @@
           </p>
      </head>
      <body>
-          <center>
-               <div class="column" id="bod">
-                    <div class="card">
-                         <h2>{{ username }}</h2>
-                         <h5>Cash: {{cash}}</h5>
-                    </div>
+          <div class="column" id="bod">
+               <div class="card">
+                    <h2>{{ username }}</h2>
+                    <h5>Cash: {{cash}}</h5>
                </div>
-          </center>
+          </div>
+          <div style="display: flexbox; margin-left: 300px;">
                <div class="column">
                {% for i in coins %}
                     <div class="card">
@@ -34,11 +33,11 @@
                <input type="submit" class="form-control mx-auto w-auto" value="Logout">
           </form>
      </body>
-     <footer  style="padding-left: 40%;">
-          <form method="post">
+     <footer>
+          <form method="post" style="margin-left: -30;">
                <div class="container py-5 h-100">
-               <div class="row d-flex justify-content-center align-items-center h-100">
-               <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+               <div class="row d-flex justify-content-center align-items-center h-80">
+               <div class="col-10 col-md-8 col-lg-6 col-xl-5">
                     <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
           
